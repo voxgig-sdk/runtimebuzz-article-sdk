@@ -1,0 +1,28 @@
+# BasicReadFinderIndexFlow
+
+main: kit: flow: BasicReadFinderIndexFlow:
+{
+  entity: "read_finder_index",
+  kind: "basic",
+  name: "BasicReadFinderIndexFlow",
+  step: [
+    {
+      input: {
+        ref: "read_finder_index_ref01",
+        srcdatavar: "read_finder_index_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-read_finder_index_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicReadFinderIndexFlow"
+}

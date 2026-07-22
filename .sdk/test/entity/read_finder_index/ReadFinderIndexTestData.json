@@ -1,0 +1,20 @@
+{
+  "existing": {
+    "read_finder_index": {
+      "READ_FINDER_INDEX00": {
+        "id": "READ_FINDER_INDEX00"
+      },
+      "READ_FINDER_INDEX01": {
+        "id": "READ_FINDER_INDEX01"
+      },
+      "READ_FINDER_INDEX02": {
+        "id": "READ_FINDER_INDEX02"
+      }
+    }
+  },
+  "new": {
+    "read_finder_index": {
+      "read_finder_index_ref01": {}
+    }
+  }
+}

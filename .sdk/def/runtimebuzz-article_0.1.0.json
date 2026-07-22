@@ -1,0 +1,297 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "RuntimeBuzz Article API",
+    "description": "The RuntimeBuzz API allows users to search for articles across various categories such as software, hardware, and AI using specific queries. It returns detailed information including titles, excerpts, and URLs of the articles in a structured JSON format.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://runtimebuzz.com/api-docs"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://runtimebuzz.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api/search": {
+      "get": {
+        "summary": "Search RuntimeBuzz articles",
+        "description": "Search RuntimeBuzz articles by title, excerpt, tags, section, author, or body text. Each result includes the title, excerpt, site path, and canonical URL.",
+        "operationId": "searchArticles",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search text. Every whitespace-separated token must appear somewhere in the article title, excerpt, tags, section, author, or body (case-insensitive). An empty q returns zero results.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "cursor"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of articles in the response (default 80, capped at 200).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 80,
+              "minimum": 1,
+              "maximum": 200
+            },
+            "example": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with article search results",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                },
+                "examples": {
+                  "withResults": {
+                    "summary": "Search with results",
+                    "value": {
+                      "query": "cursor",
+                      "count": 2,
+                      "articles": [
+                        {
+                          "title": "Understanding Cursor in Modern IDEs",
+                          "excerpt": "An in-depth look at cursor management in development environments",
+                          "path": "/software/editorials/cursor-ides",
+                          "url": "https://runtimebuzz.com/software/editorials/cursor-ides"
+                        },
+                        {
+                          "title": "Database Cursor Optimization",
+                          "excerpt": "Best practices for efficient cursor usage in databases",
+                          "path": "/software/tutorials/database-cursors",
+                          "url": "https://runtimebuzz.com/software/tutorials/database-cursors"
+                        }
+                      ]
+                    }
+                  },
+                  "emptyQuery": {
+                    "summary": "Empty query",
+                    "value": {
+                      "query": "",
+                      "count": 0,
+                      "articles": []
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/read-finder-index.json": {
+      "get": {
+        "summary": "Get article index",
+        "description": "Returns lightweight metadata for every post under content/blog/ (no markdown body). Used by the on-site read-finder widget with Fuse.js. Supports ETag and If-None-Match for caching.",
+        "operationId": "getArticleIndex",
+        "parameters": [
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "ETag value for conditional request. Returns 304 Not Modified if content unchanged.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with article index",
+            "headers": {
+              "ETag": {
+                "description": "Entity tag for caching",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleIndexResponse"
+                },
+                "example": {
+                  "version": "1.0",
+                  "generatedAt": "2026-01-15T12:00:00Z",
+                  "fingerprint": "abc123def456",
+                  "articles": [
+                    {
+                      "path": "/software/editorials/example",
+                      "title": "Example Article Title",
+                      "excerpt": "This is an example article excerpt",
+                      "tags": [
+                        "software",
+                        "tutorial"
+                      ],
+                      "tagsJoined": "software tutorial",
+                      "section": "software",
+                      "author": "John Doe",
+                      "date": "2026-01-10"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified - Content unchanged since last request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SearchResponse": {
+        "type": "object",
+        "required": [
+          "query",
+          "count",
+          "articles"
+        ],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The trimmed search string that was sent"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of articles returned",
+            "minimum": 0
+          },
+          "articles": {
+            "type": "array",
+            "description": "Array of article objects matching the search query",
+            "items": {
+              "$ref": "#/components/schemas/Article"
+            }
+          }
+        }
+      },
+      "Article": {
+        "type": "object",
+        "required": [
+          "title",
+          "excerpt",
+          "path",
+          "url"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the article"
+          },
+          "excerpt": {
+            "type": "string",
+            "description": "Short excerpt or summary of the article"
+          },
+          "path": {
+            "type": "string",
+            "description": "Relative path to the article (e.g., /software/editorials/example)",
+            "example": "/software/editorials/example"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Absolute URL of the article on runtimebuzz.com",
+            "example": "https://runtimebuzz.com/software/editorials/example"
+          }
+        }
+      },
+      "ArticleIndexResponse": {
+        "type": "object",
+        "required": [
+          "version",
+          "generatedAt",
+          "fingerprint",
+          "articles"
+        ],
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "Version of the index format"
+          },
+          "generatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the index was generated"
+          },
+          "fingerprint": {
+            "type": "string",
+            "description": "Content change token for cache invalidation"
+          },
+          "articles": {
+            "type": "array",
+            "description": "Array of all article metadata",
+            "items": {
+              "$ref": "#/components/schemas/ArticleMetadata"
+            }
+          }
+        }
+      },
+      "ArticleMetadata": {
+        "type": "object",
+        "required": [
+          "path",
+          "title",
+          "excerpt",
+          "tags",
+          "tagsJoined",
+          "section",
+          "author",
+          "date"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Relative path to the article"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the article"
+          },
+          "excerpt": {
+            "type": "string",
+            "description": "Short excerpt or summary of the article"
+          },
+          "tags": {
+            "type": "array",
+            "description": "Array of tags associated with the article",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tagsJoined": {
+            "type": "string",
+            "description": "Space-separated string of all tags"
+          },
+          "section": {
+            "type": "string",
+            "description": "Section category of the article (e.g., software, hardware, AI)"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author of the article"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Publication date of the article"
+          }
+        }
+      }
+    }
+  }
+}

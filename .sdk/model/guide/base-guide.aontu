@@ -1,0 +1,20 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 2
+  metrics: count: path: 2
+  metrics: count: method: 2
+
+  entity: read_finder_index: {
+    path: "/api/read-finder-index.json": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: search: {
+    path: "/api/search": {
+      op: load: method: *GET
+    }
+  }
+
+}

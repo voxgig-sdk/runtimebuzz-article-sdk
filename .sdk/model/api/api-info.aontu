@@ -1,0 +1,25 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      auth: false
+      contact: {
+        url: "https://runtimebuzz.com/api-docs"
+      }
+      description: "The RuntimeBuzz API allows users to search for articles across various categories such as software, hardware, and AI using specific queries. It returns detailed information including titles, excerpts, and URLs of the articles in a structured JSON format."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://runtimebuzz.com"
+        }
+      ]
+      summary: "The RuntimeBuzz API allows users to search for articles across various categories such as software, hardware, and AI using specific queries."
+      title: "RuntimeBuzz Article API"
+      version: "1.0.0"
+      website: "https://runtimebuzz.com"
+    }
+  }
+}
+

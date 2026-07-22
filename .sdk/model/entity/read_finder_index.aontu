@@ -1,0 +1,46 @@
+# Entity: read_finder_index
+
+main: kit: entity: read_finder_index: {
+
+  alias: field: {}
+
+  name: "read_finder_index"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            header: [
+              {
+                kind: "header"
+                name: "if_none_match"
+                orig: "if_none_match"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/read-finder-index.json"
+          parts: [
+            "api"
+            "read-finder-index.json"
+          ]
+          select: {
+            exist: [
+              "if_none_match"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
