@@ -65,11 +65,11 @@ def search_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "RUNTIMEBUZZARTICLE_TEST_SEARCH_ENTID" => {},
-    "RUNTIMEBUZZARTICLE_TEST_LIVE" => "FALSE",
+    "RUNTIMEBUZZ_ARTICLE_TEST_SEARCH_ENTID" => {},
+    "RUNTIMEBUZZ_ARTICLE_TEST_LIVE" => "FALSE",
   })
 
-  live = env["RUNTIMEBUZZARTICLE_TEST_LIVE"] == "TRUE"
+  live = env["RUNTIMEBUZZ_ARTICLE_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {

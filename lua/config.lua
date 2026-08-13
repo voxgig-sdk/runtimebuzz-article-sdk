@@ -45,6 +45,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/read-finder-index.json",
                 ["parts"] = {
@@ -102,6 +103,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/search",
                 ["parts"] = {

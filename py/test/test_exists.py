@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# RuntimebuzzArticle SDK exists test
 
 import pytest
 from runtimebuzzarticle_sdk import RuntimebuzzArticleSDK

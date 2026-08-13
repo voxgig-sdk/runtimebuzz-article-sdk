@@ -34,7 +34,7 @@ client = RuntimebuzzArticleSDK.new
 
 ```ruby
 begin
-  # load returns the bare ReadFinderIndex record (raises on error).
+  # load returns the ENTITY — call data_get for the ReadFinderIndex record (raises on error).
   readfinderindex = client.ReadFinderIndex.load()
   puts readfinderindex
 rescue => err
@@ -117,7 +117,8 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = RuntimebuzzArticleSDK.test
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 readfinderindex = client.ReadFinderIndex.load()
 puts readfinderindex
 ```
@@ -267,7 +268,7 @@ Create an instance: `read_finder_index = client.ReadFinderIndex`
 #### Example: Load
 
 ```ruby
-# load returns the bare ReadFinderIndex record (raises on error).
+# load returns the ENTITY — call data_get for the ReadFinderIndex record (raises on error).
 read_finder_index = client.ReadFinderIndex.load()
 ```
 
@@ -285,7 +286,7 @@ Create an instance: `search = client.Search`
 #### Example: Load
 
 ```ruby
-# load returns the bare Search record (raises on error).
+# load returns the ENTITY — call data_get for the Search record (raises on error).
 search = client.Search.load()
 ```
 

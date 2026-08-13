@@ -121,7 +121,8 @@ Create a mock client for unit testing — no server required:
 const client = RuntimebuzzArticleSDK.test()
 
 const readfinderindex = await client.ReadFinderIndex().load()
-// readfinderindex is a bare entity populated with mock response data
+// readfinderindex is the entity, populated with mock response data
+// — call readfinderindex.data() for the record itself
 console.log(readfinderindex)
 ```
 

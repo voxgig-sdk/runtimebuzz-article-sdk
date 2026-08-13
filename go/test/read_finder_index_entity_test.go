@@ -44,7 +44,7 @@ func TestReadFinderIndexEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set RUNTIMEBUZZARTICLE_TEST_READ_FINDER_INDEX_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set RUNTIMEBUZZ_ARTICLE_TEST_READ_FINDER_INDEX_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -110,21 +110,21 @@ func read_finder_indexBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("RUNTIMEBUZZARTICLE_TEST_READ_FINDER_INDEX_ENTID")
+	entidEnvRaw := os.Getenv("RUNTIMEBUZZ_ARTICLE_TEST_READ_FINDER_INDEX_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"RUNTIMEBUZZARTICLE_TEST_READ_FINDER_INDEX_ENTID": idmap,
-		"RUNTIMEBUZZARTICLE_TEST_LIVE":      "FALSE",
-		"RUNTIMEBUZZARTICLE_TEST_EXPLAIN":   "FALSE",
+		"RUNTIMEBUZZ_ARTICLE_TEST_READ_FINDER_INDEX_ENTID": idmap,
+		"RUNTIMEBUZZ_ARTICLE_TEST_LIVE":      "FALSE",
+		"RUNTIMEBUZZ_ARTICLE_TEST_EXPLAIN":   "FALSE",
 	})
 
-	idmapResolved := core.ToMapAny(env["RUNTIMEBUZZARTICLE_TEST_READ_FINDER_INDEX_ENTID"])
+	idmapResolved := core.ToMapAny(env["RUNTIMEBUZZ_ARTICLE_TEST_READ_FINDER_INDEX_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["RUNTIMEBUZZARTICLE_TEST_LIVE"] == "TRUE" {
+	if env["RUNTIMEBUZZ_ARTICLE_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
 			},
@@ -133,13 +133,13 @@ func read_finder_indexBasicSetup(extra map[string]any) *entityTestSetup {
 		client = sdk.NewRuntimebuzzArticleSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["RUNTIMEBUZZARTICLE_TEST_LIVE"] == "TRUE"
+	live := env["RUNTIMEBUZZ_ARTICLE_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["RUNTIMEBUZZARTICLE_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["RUNTIMEBUZZ_ARTICLE_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

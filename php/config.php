@@ -51,6 +51,7 @@ class RuntimebuzzArticleConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/read-finder-index.json',
                   'parts' => [
@@ -108,6 +109,7 @@ class RuntimebuzzArticleConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/search',
                   'parts' => [

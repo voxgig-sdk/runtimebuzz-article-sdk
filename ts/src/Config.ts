@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'RuntimebuzzArticle',
   }
 
 
@@ -77,6 +77,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/read-finder-index.json",
               "parts": [
@@ -134,6 +135,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/search",
               "parts": [

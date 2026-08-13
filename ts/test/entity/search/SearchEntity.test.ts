@@ -26,8 +26,8 @@ import {
 describe('SearchEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when RUNTIMEBUZZARTICLE_TEST_LIVE=TRUE.
-  afterEach(liveDelay('RUNTIMEBUZZARTICLE_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when RUNTIMEBUZZ_ARTICLE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('RUNTIMEBUZZ_ARTICLE_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = RuntimebuzzArticleSDK.test()
@@ -62,7 +62,7 @@ describe('SearchEntity', async () => {
     // LOAD
     const search_ref01_ent = client.Search()
     const search_ref01_match_dt0: any = {}
-    const search_ref01_data_dt0 = await search_ref01_ent.load(search_ref01_match_dt0)
+    const search_ref01_data_dt0 = (await search_ref01_ent.load(search_ref01_match_dt0)).data()
     assert(null != search_ref01_data_dt0)
 
 

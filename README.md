@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = RuntimebuzzArticleSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = RuntimebuzzArticleSDK.test({
+  entity: {
+    read_finder_index: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const readfinderindex = await client.ReadFinderIndex().load()
-// readfinderindex is a bare ReadFinderIndex populated with mock data
+// readfinderindex is the ReadFinderIndex entity, populated with mock data
+// — call readfinderindex.data() for the record itself
 console.log(readfinderindex)
 ```
 
@@ -183,7 +192,7 @@ require_once 'runtimebuzzarticle_sdk.php';
 $client = new RuntimebuzzArticleSDK();
 
 
-// Load a specific readfinderindex (returns the bare record; throws on error)
+// Load a specific readfinderindex (returns the ENTITY; call data_get() for the record; throws on error)
 $readfinderindex = $client->ReadFinderIndex()->load();
 print_r($readfinderindex);
 ```
@@ -211,7 +220,7 @@ require_relative "RuntimebuzzArticle_sdk"
 client = RuntimebuzzArticleSDK.new
 
 
-# Load a specific readfinderindex (returns the bare record; raises on error)
+# Load a specific readfinderindex (returns the ENTITY; call data_get for the record)
 readfinderindex = client.ReadFinderIndex.load()
 puts readfinderindex
 ```
@@ -345,6 +354,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://runtimebuzz.com/api-docs](https://runtimebuzz.com/api-docs)
 

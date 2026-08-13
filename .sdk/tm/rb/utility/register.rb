@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ RuntimebuzzArticleUtility.registrar = ->(u) {
   u.prepare_params = RuntimebuzzArticleUtilities::PrepareParams
   u.prepare_path = RuntimebuzzArticleUtilities::PreparePath
   u.prepare_query = RuntimebuzzArticleUtilities::PrepareQuery
+  u.graphql_body = RuntimebuzzArticleUtilities::GraphqlBody
+  u.graphql_errors = RuntimebuzzArticleUtilities::GraphqlErrors
   u.result_basic = RuntimebuzzArticleUtilities::ResultBasic
   u.result_body = RuntimebuzzArticleUtilities::ResultBody
   u.result_headers = RuntimebuzzArticleUtilities::ResultHeaders

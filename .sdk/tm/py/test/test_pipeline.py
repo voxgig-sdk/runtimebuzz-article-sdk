@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import RuntimebuzzArticleSDK
-from core.error import RuntimebuzzArticleError
-from core.result import RuntimebuzzArticleResult
-from core.response import RuntimebuzzArticleResponse
-from core.spec import RuntimebuzzArticleSpec
-from feature.base_feature import RuntimebuzzArticleBaseFeature
+from projectname_sdk.core.error import RuntimebuzzArticleError
+from projectname_sdk.core.result import RuntimebuzzArticleResult
+from projectname_sdk.core.response import RuntimebuzzArticleResponse
+from projectname_sdk.core.spec import RuntimebuzzArticleSpec
+from projectname_sdk.feature.base_feature import RuntimebuzzArticleBaseFeature
 
 
 def _client():

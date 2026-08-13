@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ RuntimebuzzArticleUtility::setRegistrar(function (RuntimebuzzArticleUtility $u):
     $u->prepare_params = [RuntimebuzzArticlePrepareParams::class, 'call'];
     $u->prepare_path = [RuntimebuzzArticlePreparePath::class, 'call'];
     $u->prepare_query = [RuntimebuzzArticlePrepareQuery::class, 'call'];
+    $u->graphql_body = [RuntimebuzzArticleGraphql::class, 'body'];
+    $u->graphql_errors = [RuntimebuzzArticleGraphql::class, 'errors'];
     $u->result_basic = [RuntimebuzzArticleResultBasic::class, 'call'];
     $u->result_body = [RuntimebuzzArticleResultBody::class, 'call'];
     $u->result_headers = [RuntimebuzzArticleResultHeaders::class, 'call'];

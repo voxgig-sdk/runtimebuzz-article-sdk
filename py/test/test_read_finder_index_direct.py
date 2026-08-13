@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from runtimebuzzarticle_sdk.utility.voxgig_struct import voxgig_struct as vs
 from runtimebuzzarticle_sdk import RuntimebuzzArticleSDK
-from core import helpers
+from runtimebuzzarticle_sdk.core import helpers
 from test import runner
 
 
@@ -56,11 +56,11 @@ def _read_finder_index_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "RUNTIMEBUZZARTICLE_TEST_READ_FINDER_INDEX_ENTID": {},
-        "RUNTIMEBUZZARTICLE_TEST_LIVE": "FALSE",
+        "RUNTIMEBUZZ_ARTICLE_TEST_READ_FINDER_INDEX_ENTID": {},
+        "RUNTIMEBUZZ_ARTICLE_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("RUNTIMEBUZZARTICLE_TEST_LIVE") == "TRUE"
+    live = env.get("RUNTIMEBUZZ_ARTICLE_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

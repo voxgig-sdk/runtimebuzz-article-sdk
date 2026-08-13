@@ -65,11 +65,11 @@ function read_finder_index_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "RUNTIMEBUZZARTICLE_TEST_READ_FINDER_INDEX_ENTID" => [],
-        "RUNTIMEBUZZARTICLE_TEST_LIVE" => "FALSE",
+        "RUNTIMEBUZZ_ARTICLE_TEST_READ_FINDER_INDEX_ENTID" => [],
+        "RUNTIMEBUZZ_ARTICLE_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["RUNTIMEBUZZARTICLE_TEST_LIVE"] === "TRUE";
+    $live = $env["RUNTIMEBUZZ_ARTICLE_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

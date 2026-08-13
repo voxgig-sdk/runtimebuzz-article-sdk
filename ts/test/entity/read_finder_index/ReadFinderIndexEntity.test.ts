@@ -26,8 +26,8 @@ import {
 describe('ReadFinderIndexEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when RUNTIMEBUZZARTICLE_TEST_LIVE=TRUE.
-  afterEach(liveDelay('RUNTIMEBUZZARTICLE_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when RUNTIMEBUZZ_ARTICLE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('RUNTIMEBUZZ_ARTICLE_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = RuntimebuzzArticleSDK.test()
@@ -62,7 +62,7 @@ describe('ReadFinderIndexEntity', async () => {
     // LOAD
     const read_finder_index_ref01_ent = client.ReadFinderIndex()
     const read_finder_index_ref01_match_dt0: any = {}
-    const read_finder_index_ref01_data_dt0 = await read_finder_index_ref01_ent.load(read_finder_index_ref01_match_dt0)
+    const read_finder_index_ref01_data_dt0 = (await read_finder_index_ref01_ent.load(read_finder_index_ref01_match_dt0)).data()
     assert(null != read_finder_index_ref01_data_dt0)
 
 

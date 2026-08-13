@@ -43,8 +43,8 @@ class RuntimebuzzArticleTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('RUNTIMEBUZZARTICLE_TEST_LIVE');
-        $override = self::getenv('RUNTIMEBUZZARTICLE_TEST_OVERRIDE');
+        $live = self::getenv('RUNTIMEBUZZ_ARTICLE_TEST_LIVE');
+        $override = self::getenv('RUNTIMEBUZZ_ARTICLE_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class RuntimebuzzArticleTestRunner
             }
         }
 
-        $explain = self::getenv('RUNTIMEBUZZARTICLE_TEST_EXPLAIN');
+        $explain = self::getenv('RUNTIMEBUZZ_ARTICLE_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['RUNTIMEBUZZARTICLE_TEST_EXPLAIN'] = $explain;
+            $m['RUNTIMEBUZZ_ARTICLE_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import RuntimebuzzArticleControl
-from core.error import RuntimebuzzArticleError
-from core.result import RuntimebuzzArticleResult
-from core.spec import RuntimebuzzArticleSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import RuntimebuzzArticleControl
+from projectname_sdk.core.error import RuntimebuzzArticleError
+from projectname_sdk.core.result import RuntimebuzzArticleResult
+from projectname_sdk.core.spec import RuntimebuzzArticleSpec
 
 
 # True when this SDK was generated with the named feature.

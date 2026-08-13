@@ -23,8 +23,8 @@ module RuntimebuzzArticleTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("RUNTIMEBUZZARTICLE_TEST_LIVE")
-    override = getenv("RUNTIMEBUZZARTICLE_TEST_OVERRIDE")
+    live = getenv("RUNTIMEBUZZ_ARTICLE_TEST_LIVE")
+    override = getenv("RUNTIMEBUZZ_ARTICLE_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module RuntimebuzzArticleTestRunner
       end
     end
 
-    explain = getenv("RUNTIMEBUZZARTICLE_TEST_EXPLAIN")
-    m["RUNTIMEBUZZARTICLE_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("RUNTIMEBUZZ_ARTICLE_TEST_EXPLAIN")
+    m["RUNTIMEBUZZ_ARTICLE_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end
