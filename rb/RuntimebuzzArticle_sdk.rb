@@ -28,7 +28,7 @@ class RuntimebuzzArticleSDK
     utility = RuntimebuzzArticleUtility.new
     @_utility = utility
 
-    config = RuntimebuzzArticleConfig.make_config
+    config = RuntimebuzzArticleConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

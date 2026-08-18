@@ -40,7 +40,7 @@ class RuntimebuzzArticleSDK
         $utility = new RuntimebuzzArticleUtility();
         $this->_utility = $utility;
 
-        $config = RuntimebuzzArticleConfig::make_config();
+        $config = RuntimebuzzArticleConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

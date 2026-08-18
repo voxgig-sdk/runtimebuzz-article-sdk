@@ -15,7 +15,7 @@ require_relative "../RuntimebuzzArticle_sdk"
 module RuntimebuzzArticleFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = RuntimebuzzArticleConfig.make_config["feature"]
+    f = RuntimebuzzArticleConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

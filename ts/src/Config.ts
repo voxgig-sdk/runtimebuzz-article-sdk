@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://runtimebuzz.com',
+    base: "https://runtimebuzz.com",
 
     headers: {
       "content-type": "application/json"
@@ -64,15 +64,12 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "header": [
                   {
-                    "active": true,
                     "kind": "header",
                     "name": "if_none_match",
                     "orig": "if_none_match",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -92,11 +89,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -112,20 +107,16 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": 5,
                     "kind": "query",
                     "name": "limit",
                     "orig": "limit",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "example": "cursor",
                     "kind": "query",
                     "name": "q",
@@ -151,11 +142,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {

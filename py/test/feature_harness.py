@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from runtimebuzzarticle_sdk.config import make_config
+from runtimebuzzarticle_sdk.config import shared_config
 from runtimebuzzarticle_sdk.features import _make_feature
 from runtimebuzzarticle_sdk.core.control import RuntimebuzzArticleControl
 from runtimebuzzarticle_sdk.core.error import RuntimebuzzArticleError
@@ -24,7 +24,7 @@ from runtimebuzzarticle_sdk.core.spec import RuntimebuzzArticleSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

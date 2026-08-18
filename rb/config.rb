@@ -1,6 +1,20 @@
 # RuntimebuzzArticle SDK configuration
 
 module RuntimebuzzArticleConfig
+  # Return the process-wide config, built once on first use. The SDK reads
+  # the config on every request and never writes to it, so one instance is
+  # shared by every client rather than rebuilt per client.
+  #
+  # The returned hash is shared: treat it as read-only. Callers that need to
+  # mutate should use make_config, which always returns a fresh copy.
+  def self.shared_config
+    @shared_config ||= make_config
+  end
+
+
+  # Build a fresh, fully materialised config hash. Every call rebuilds the
+  # whole structure, so prefer shared_config unless you need a private copy
+  # you intend to mutate.
   def self.make_config
     {
       "main" => {
@@ -33,15 +47,12 @@ module RuntimebuzzArticleConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "header" => [
                       {
-                        "active" => true,
                         "kind" => "header",
                         "name" => "if_none_match",
                         "orig" => "if_none_match",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -62,10 +73,8 @@ module RuntimebuzzArticleConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -81,20 +90,16 @@ module RuntimebuzzArticleConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "example" => 5,
                         "kind" => "query",
                         "name" => "limit",
                         "orig" => "limit",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "example" => "cursor",
                         "kind" => "query",
                         "name" => "q",
@@ -121,10 +126,8 @@ module RuntimebuzzArticleConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
