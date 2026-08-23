@@ -33,6 +33,9 @@ class RuntimebuzzArticleConfig
         return [
             "main" => [
                 "name" => "RuntimebuzzArticle",
+                "slug" => "runtimebuzz-article",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [

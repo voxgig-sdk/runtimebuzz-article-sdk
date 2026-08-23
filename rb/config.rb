@@ -19,6 +19,9 @@ module RuntimebuzzArticleConfig
     {
       "main" => {
         "name" => "RuntimebuzzArticle",
+        "slug" => "runtimebuzz-article",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
