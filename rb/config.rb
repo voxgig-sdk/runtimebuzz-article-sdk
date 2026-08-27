@@ -28,6 +28,7 @@ module RuntimebuzzArticleConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
