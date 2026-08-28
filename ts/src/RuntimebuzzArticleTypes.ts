@@ -15,5 +15,7 @@ export interface Search {
 }
 
 export interface SearchLoadMatch {
+  limit?: number
+  q: string
 }
 

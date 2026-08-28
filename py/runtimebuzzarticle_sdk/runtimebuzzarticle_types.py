@@ -28,5 +28,9 @@ class Search(TypedDict):
     pass
 
 
-class SearchLoadMatch(TypedDict):
-    pass
+class SearchLoadMatchRequired(TypedDict):
+    q: str
+
+
+class SearchLoadMatch(SearchLoadMatchRequired, total=False):
+    limit: int

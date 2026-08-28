@@ -21,6 +21,15 @@ class Search
 end
 
 # Request payload for Search#load.
-class SearchLoadMatch
-end
+#
+# @!attribute [rw] limit
+#   @return [Integer, nil]
+#
+# @!attribute [rw] q
+#   @return [String]
+SearchLoadMatch = Struct.new(
+  :limit,
+  :q,
+  keyword_init: true
+)
 

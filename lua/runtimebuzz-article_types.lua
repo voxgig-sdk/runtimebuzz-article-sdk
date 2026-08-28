@@ -13,6 +13,8 @@
 ---@class Search
 
 ---@class SearchLoadMatch
+---@field limit? number
+---@field q string
 
 local M = {}
 

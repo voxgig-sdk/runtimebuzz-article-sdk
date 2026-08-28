@@ -30,5 +30,7 @@ class Search
 /** Request payload for Search#load. */
 class SearchLoadMatch
 {
+    public ?int $limit = null;
+    public string $q;
 }
 
