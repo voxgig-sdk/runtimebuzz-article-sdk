@@ -1,6 +1,14 @@
 # RuntimebuzzArticle SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -73,9 +81,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/read-finder-index.json",
-                "parts": [
-                  "api",
-                  "read-finder-index.json",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "read-finder-index.json",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -86,6 +98,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "read-finder-index.json",
+                ],
               },
             ],
           },
@@ -125,9 +141,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/search",
-                "parts": [
-                  "api",
-                  "search",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "search",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -139,6 +159,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "search",
+                ],
               },
             ],
           },

@@ -52,9 +52,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/read-finder-index.json",
-                ["parts"] = {
-                  "api",
-                  "read-finder-index.json",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "read-finder-index.json",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -64,6 +68,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "read-finder-index.json",
                 },
               },
             },
@@ -104,9 +112,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/search",
-                ["parts"] = {
-                  "api",
-                  "search",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "search",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -117,6 +129,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "search",
                 },
               },
             },

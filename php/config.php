@@ -78,9 +78,13 @@ class RuntimebuzzArticleConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/read-finder-index.json',
-                  'parts' => [
-                    'api',
-                    'read-finder-index.json',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'read-finder-index.json',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -90,6 +94,10 @@ class RuntimebuzzArticleConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'read-finder-index.json',
                   ],
                 ],
               ],
@@ -130,9 +138,13 @@ class RuntimebuzzArticleConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/search',
-                  'parts' => [
-                    'api',
-                    'search',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'search',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -143,6 +155,10 @@ class RuntimebuzzArticleConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'search',
                   ],
                 ],
               ],

@@ -23,9 +23,13 @@ main: kit: entity: read_finder_index: {
           }
           method: "GET"
           orig: "/api/read-finder-index.json"
-          parts: [
-            "api"
-            "read-finder-index.json"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "read-finder-index.json"
+            }
           ]
           select: {
             exist: [
