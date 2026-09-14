@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { RuntimebuzzArticleSDK } from '@voxgig-sdk/runtimebuzz-article'
+import { RuntimebuzzArticleSDK } from '@voxgig-sdk/runtimebuzz-article-sdk'
 
 const client = new RuntimebuzzArticleSDK()
 ```
@@ -421,7 +421,7 @@ runtimebuzz-article/
 Import the SDK from the package root:
 
 ```ts
-import { RuntimebuzzArticleSDK } from '@voxgig-sdk/runtimebuzz-article'
+import { RuntimebuzzArticleSDK } from '@voxgig-sdk/runtimebuzz-article-sdk'
 ```
 
 ### Entity state

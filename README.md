@@ -105,7 +105,7 @@ local result, err = client:ReadFinderIndex():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/releases) |
+| TypeScript | `@voxgig-sdk/runtimebuzz-article-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/releases) |
 | Python | `voxgig-sdk-runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/releases) |
 | PHP | `voxgig-sdk/runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/runtimebuzz-article-sdk/go` | `go get github.com/voxgig-sdk/runtimebuzz-article-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:ReadFinderIndex():load()
 ### TypeScript
 
 ```ts
-import { RuntimebuzzArticleSDK } from '@voxgig-sdk/runtimebuzz-article'
+import { RuntimebuzzArticleSDK } from '@voxgig-sdk/runtimebuzz-article-sdk'
 
 const client = new RuntimebuzzArticleSDK()
 
