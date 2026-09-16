@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.RUNTIMEBUZZ_ARTICLE_TEST_LIVE;
         for (const op of ['load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'search.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'search.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set RUNTIMEBUZZ_ARTICLE_TEST_SEARCH_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [], "name": "search", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "query": [{ "active": true, "example": 5, "kind": "query", "name": "limit", "orig": "limit", "reqd": false, "type": "`$INTEGER`", "index$": 0 }, { "active": true, "example": "cursor", "kind": "query", "name": "q", "orig": "q", "reqd": true, "type": "`$STRING`", "index$": 1 }] }, "contract": { "id": "GET /api/search", "json": "{\"operationId\":\"searchArticles\",\"parameters\":[{\"description\":\"Search text. Every whitespace-separated token must appear somewhere in the article title, excerpt, tags, section, author, or body (case-insensitive). An empty q returns zero results.\",\"example\":\"cursor\",\"in\":\"query\",\"name\":\"q\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Maximum number of articles in the response (default 80, capped at 200).\",\"example\":5,\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":80,\"maximum\":200,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json; charset=utf-8\":{\"examples\":{\"emptyQuery\":{\"summary\":\"Empty query\",\"value\":{\"articles\":[],\"count\":0,\"query\":\"\"}},\"withResults\":{\"summary\":\"Search with results\",\"value\":{\"articles\":[{\"excerpt\":\"An in-depth look at cursor management in development environments\",\"path\":\"/software/editorials/cursor-ides\",\"title\":\"Understanding Cursor in Modern IDEs\",\"url\":\"https://runtimebuzz.com/software/editorials/cursor-ides\"},{\"excerpt\":\"Best practices for efficient cursor usage in databases\",\"path\":\"/software/tutorials/database-cursors\",\"title\":\"Database Cursor Optimization\",\"url\":\"https://runtimebuzz.com/software/tutorials/database-cursors\"}],\"count\":2,\"query\":\"cursor\"}}},\"schema\":{\"properties\":{\"articles\":{\"description\":\"Array of article objects matching the search query\",\"items\":{\"properties\":{\"excerpt\":{\"description\":\"Short excerpt or summary of the article\",\"type\":\"string\"},\"path\":{\"description\":\"Relative path to the article (e.g., /software/editorials/example)\",\"example\":\"/software/editorials/example\",\"type\":\"string\"},\"title\":{\"description\":\"Title of the article\",\"type\":\"string\"},\"url\":{\"description\":\"Absolute URL of the article on runtimebuzz.com\",\"example\":\"https://runtimebuzz.com/software/editorials/example\",\"format\":\"uri\",\"type\":\"string\"}},\"required\":[\"title\",\"excerpt\",\"path\",\"url\"],\"type\":\"object\"},\"type\":\"array\"},\"count\":{\"description\":\"Number of articles returned\",\"minimum\":0,\"type\":\"integer\"},\"query\":{\"description\":\"The trimmed search string that was sent\",\"type\":\"string\"}},\"required\":[\"query\",\"count\",\"articles\"],\"type\":\"object\"}}},\"description\":\"Successful response with article search results\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/api/search", "segments": [{ "lit": "api" }, { "lit": "search" }], "select": { "exist": ["limit", "q"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "search", "name__orig": "search", "Name": "Search", "name_": "search", "name-": "search", "NAME": "SEARCH", "index$": 1 }, { "active": true, "entity": "search", "key$": "BasicSearchFlow", "kind": "basic", "name": "BasicSearchFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "search_ref01", "srcdatavar": "search_ref01_data", "suffix": "_dt0" }, "match": {}, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-search_ref01" } }], "index$": 0 }] }, 'Search');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -102,12 +100,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['RUNTIMEBUZZ_ARTICLE_TEST_SEARCH_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'RUNTIMEBUZZ_ARTICLE_TEST_SEARCH_ENTID': idmap,
         'RUNTIMEBUZZ_ARTICLE_TEST_LIVE': 'FALSE',
@@ -115,7 +107,13 @@ function basicSetup(extra) {
     });
     idmap = env['RUNTIMEBUZZ_ARTICLE_TEST_SEARCH_ENTID'];
     const live = 'TRUE' === env.RUNTIMEBUZZ_ARTICLE_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['RUNTIMEBUZZ_ARTICLE_TEST_SEARCH_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.RuntimebuzzArticleSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -126,7 +124,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -138,7 +137,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.RUNTIMEBUZZ_ARTICLE_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;
