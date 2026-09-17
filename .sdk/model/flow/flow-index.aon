@@ -1,4 +1,4 @@
 # Flows
 
-@"BasicReadFinderIndexFlow.aon"
-@"BasicSearchFlow.aon"
+@"./BasicReadFinderIndexFlow.aon"
+@"./BasicSearchFlow.aon"

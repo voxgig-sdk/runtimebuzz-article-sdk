@@ -1,4 +1,4 @@
 # Entity Models
 
-@"read_finder_index.aon"
-@"search.aon"
+@"./read_finder_index.aon"
+@"./search.aon"

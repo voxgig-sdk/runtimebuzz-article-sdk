@@ -127,12 +127,12 @@ class Config {
 
     entity: {
       
-      read_finder_index: {
-      },
-
-      search: {
-      },
-
+        read_finder_index: {
+        },
+  
+        search: {
+        },
+  
     }
   }
 

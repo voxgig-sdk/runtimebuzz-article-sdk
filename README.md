@@ -105,12 +105,12 @@ local result, err = client:ReadFinderIndex():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/runtimebuzz-article-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/releases) |
-| Python | `voxgig-sdk-runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/releases) |
-| PHP | `voxgig-sdk/runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/releases) |
+| TypeScript | `@voxgig-sdk/runtimebuzz-article-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/tags) |
+| Python | `voxgig-sdk-runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/tags) |
+| PHP | `voxgig-sdk/runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/runtimebuzz-article-sdk/go` | `go get github.com/voxgig-sdk/runtimebuzz-article-sdk/go@latest` |
-| Ruby | `voxgig-sdk-runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/releases) |
-| Lua | `voxgig-sdk-runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/releases) |
+| Ruby | `voxgig-sdk-runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/tags) |
+| Lua | `voxgig-sdk-runtimebuzz-article` | publish pending — [install from git tag](https://github.com/voxgig-sdk/runtimebuzz-article-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/runtimebuzz-article-sdk/go-cli` | `go install github.com/voxgig-sdk/runtimebuzz-article-sdk/go-cli/cmd/runtimebuzz-article@latest` |
 | Go MCP server | `github.com/voxgig-sdk/runtimebuzz-article-sdk/go-mcp` | `go get github.com/voxgig-sdk/runtimebuzz-article-sdk/go-mcp@latest` |
 
