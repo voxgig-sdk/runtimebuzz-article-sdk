@@ -97,16 +97,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"kind": "header",
-											"name": "if_none_match",
-											"orig": "if_none_match",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api/read-finder-index.json",
@@ -118,18 +108,29 @@ func MakeConfig() map[string]any {
 										"lit": "read-finder-index.json",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"if_none_match",
-									},
+								"parts": []any{
+									"api",
+									"read-finder-index.json",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"api",
-									"read-finder-index.json",
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "if_none_match",
+											"orig": "if_none_match",
+											"type": "`$STRING`",
+											"kind": "header",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"if_none_match",
+									},
 								},
 							},
 						},
@@ -148,25 +149,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 5,
-											"kind": "query",
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": "cursor",
-											"kind": "query",
-											"name": "q",
-											"orig": "q",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api/search",
@@ -178,19 +160,39 @@ func MakeConfig() map[string]any {
 										"lit": "search",
 									},
 								},
+								"parts": []any{
+									"api",
+									"search",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 5,
+										},
+										map[string]any{
+											"name": "q",
+											"orig": "q",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "cursor",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"limit",
 										"q",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"api",
-									"search",
 								},
 							},
 						},

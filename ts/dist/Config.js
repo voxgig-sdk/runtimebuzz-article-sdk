@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -120,16 +113,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "header": [
-                                    {
-                                        "kind": "header",
-                                        "name": "if_none_match",
-                                        "orig": "if_none_match",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/api/read-finder-index.json",
@@ -141,19 +124,30 @@ class Config {
                                     "lit": "read-finder-index.json"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "if_none_match"
-                                ]
-                            },
+                            "parts": [
+                                "api",
+                                "read-finder-index.json"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "api",
-                                "read-finder-index.json"
-                            ]
+                            "args": {
+                                "header": [
+                                    {
+                                        "name": "if_none_match",
+                                        "orig": "if_none_match",
+                                        "type": "`$STRING`",
+                                        "kind": "header"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "if_none_match"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -171,25 +165,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": 5,
-                                        "kind": "query",
-                                        "name": "limit",
-                                        "orig": "limit",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": "cursor",
-                                        "kind": "query",
-                                        "name": "q",
-                                        "orig": "q",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/api/search",
@@ -201,20 +176,40 @@ class Config {
                                     "lit": "search"
                                 }
                             ],
+                            "parts": [
+                                "api",
+                                "search"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 5
+                                    },
+                                    {
+                                        "name": "q",
+                                        "orig": "q",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "cursor"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "limit",
                                     "q"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "api",
-                                "search"
-                            ]
+                            }
                         }
                     ]
                 }

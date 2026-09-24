@@ -119,16 +119,6 @@ class RuntimebuzzArticleConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'header' => [
-                      [
-                        'kind' => 'header',
-                        'name' => 'if_none_match',
-                        'orig' => 'if_none_match',
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/read-finder-index.json',
@@ -140,18 +130,29 @@ class RuntimebuzzArticleConfig
                       'lit' => 'read-finder-index.json',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'if_none_match',
-                    ],
+                  'parts' => [
+                    'api',
+                    'read-finder-index.json',
                   ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'parts' => [
-                    'api',
-                    'read-finder-index.json',
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'if_none_match',
+                        'orig' => 'if_none_match',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'if_none_match',
+                    ],
                   ],
                 ],
               ],
@@ -170,25 +171,6 @@ class RuntimebuzzArticleConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => 5,
-                        'kind' => 'query',
-                        'name' => 'limit',
-                        'orig' => 'limit',
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'example' => 'cursor',
-                        'kind' => 'query',
-                        'name' => 'q',
-                        'orig' => 'q',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/search',
@@ -200,19 +182,39 @@ class RuntimebuzzArticleConfig
                       'lit' => 'search',
                     ],
                   ],
+                  'parts' => [
+                    'api',
+                    'search',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'limit',
+                        'orig' => 'limit',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'example' => 5,
+                      ],
+                      [
+                        'name' => 'q',
+                        'orig' => 'q',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                        'example' => 'cursor',
+                      ],
+                    ],
+                  ],
                   'select' => [
                     'exist' => [
                       'limit',
                       'q',
                     ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'parts' => [
-                    'api',
-                    'search',
                   ],
                 ],
               ],

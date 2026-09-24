@@ -1,0 +1,58 @@
+# Entity: read_finder_index
+
+main: kit: entity: read_finder_index: {
+
+  alias: field: {}
+
+  name: "read_finder_index"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/read-finder-index.json"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "if_none_match"
+                or: "if_none_match"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/read-finder-index.json"
+          q: {
+            exist: [
+              "if_none_match"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "read-finder-index.json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}
